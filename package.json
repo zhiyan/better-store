@@ -1,0 +1,19 @@
+{
+  "name": "better-store",
+  "version": "1.0.0",
+  "description": "better state manager use react hooks",
+  "main": "libs/index.js",
+  "scripts": {
+    "start": "parcel example/index.html --out-dir example/dist",
+    "build": "rm -rf libs && tsc -p tsconfig.json"
+  },
+  "author": "zhiyan.wang",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react": "^16.9.13",
+    "parcel": "^1.12.4",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "typescript": "^3.7.2"
+  }
+}
