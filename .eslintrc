@@ -6,15 +6,19 @@
     "es6": true,
     "jquery": true
   },
-  "parser": "babel-eslint",
-  "plugins": ["react", "babel"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["react", "@typescript-eslint"],
   "rules": {
+    "import/no-unresolved": 0,
+    "no-restricted-syntax": 0,
+    "import/no-extraneous-dependencies": 0,
     "react/state-in-constructor": 0,
     "react/jsx-one-expression-per-line": 0,
     "react/prop-types": 0,
     "react/jsx-curly-newline": 0,
     "react/forbid-prop-types": 0,
     "react/jsx-indent": 0,
+    "react/button-has-type": 0,
     "react/jsx-wrap-multilines": [
       "error",
       {
@@ -25,7 +29,7 @@
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [".js", ".jsx"]
+        "extensions": [".js", ".jsx", ".tsx"]
       }
     ],
     "react/jsx-props-no-spreading": 0,
@@ -33,7 +37,6 @@
     "jsx-a11y/anchor-has-content": 0,
     "jsx-a11y/click-events-have-key-events": 0,
     "jsx-a11y/anchor-is-valid": 0,
-    "comma-dangle": ["error", "always-multiline"],
-    "import/no-unresolved": [2, { "ignore": ["^@/"] }]
+    "comma-dangle": ["error", "always-multiline"]
   }
 }

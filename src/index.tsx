@@ -1,57 +1,54 @@
-import React, {ReactNode} from 'react';
-
+import React from 'react';
 
 export type Dict = {
-	[key: string]: any
-}
+  [key: string]: any;
+};
 
 export interface ProviderProps {
-	children: ReactNode,
+  children: React.ReactNode;
 }
 
 const GlobalContext = React.createContext<any>(null);
 
-const cache: Dict= {}
+const cache: Dict = {};
 
-export function createStore(
-	name: string,
-	useHook: () => any,
-){
-	cache[name] = {
-		useHook,
-	};
+export function createStore(name: string, useHook: () => any) {
+  cache[name] = {
+    useHook,
+  };
 }
 
-export function useStore(store?: string | Function){
-	const value = React.useContext(GlobalContext);
+export function useStore(store?: string | Function) {
+  const value = React.useContext(GlobalContext);
 
-	if (value === null) {
-		throw new Error("Component must be wrapped with <Provider>")
-	}
+  if (value === null) {
+    throw new Error('Component must be wrapped with <Provider>');
+  }
 
-	if(!store){
-		return value;
-	}
+  if (!store) {
+    return value;
+  }
 
-	if(typeof store === 'function'){
-		return store(value);
-	}
+  if (typeof store === 'function') {
+    return store(value);
+  }
 
-	return value[store];
+  return value[store];
 }
 
-function useGlobalStore(){
-	const keys = Object.keys(cache);
-	const globalStore: Dict = {};
-	
-	for(const key of keys){
-		globalStore[key] = cache[key].useHook();
-	}
+function useGlobalStore() {
+  const keys = Object.keys(cache);
+  const globalStore: Dict = {};
 
-	return globalStore;
+  for (const key of keys) {
+    globalStore[key] = cache[key].useHook();
+  }
+
+  return globalStore;
 }
 
-export function Provider(props: ProviderProps){
-	const value = useGlobalStore();
-	return <GlobalContext.Provider value={value}>{props.children}</GlobalContext.Provider>
+export function Provider(props: ProviderProps) {
+  const { children } = props;
+  const value = useGlobalStore();
+  return <GlobalContext.Provider value={value}>{children}</GlobalContext.Provider>;
 }
