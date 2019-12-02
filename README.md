@@ -12,46 +12,47 @@
 ### example
 
 ```javascript
-import React, { useState } from "react"
-import { Provider, useStore, createStore } from "better-store"
-import { render } from "react-dom"
+import React, { useState } from 'react';
+import { Provider, useStore, createStore } from 'better-store';
+import { render } from 'react-dom';
 
 function useCounter() {
-	let [count, setCount] = useState(0)
-	let decrement = () => setCount(count - 1)
-	let increment = () => setCount(count + 1)
-	return { count, decrement, increment }
+  const [count, setCount] = useState(0);
+  const decrement = () => setCount(count - 1);
+  const increment = () => setCount(count + 1);
+  return { count, decrement, increment };
 }
 
 createStore('counter', useCounter);
 
 function CounterEdit() {
-	let counter = useStore('counter')
-  
-	return (
-		<div>
-			<button onClick={counter.decrement}>-</button>
-			<span>{counter.count}</span>
-			<button onClick={counter.increment}>+</button>
-		</div>
-	)
+  const counter = useStore('counter');
+
+  return (
+    <div>
+      <button onClick={counter.decrement}>-</button>
+      <span>{counter.count}</span>
+      <button onClick={counter.increment}>+</button>
+    </div>
+  );
 }
 
-function CounterDisplay(){
-	const count = useStore(({counter}) => counter.count);
+function CounterDisplay() {
+  const count = useStore(({ counter }) => counter.count);
 
-	return (<div>{count}</div>)
+  return <div>{count}</div>;
 }
 
 function App() {
-	return (
-		<Provider>
-			<CounterEdit />
-			<CounterDisplay />
-		</Provider>
-	)
+  return (
+    <Provider>
+      <CounterEdit />
+      <CounterDisplay />
+    </Provider>
+  );
 }
 
-React.render(<App />, document.getElementById("root"))
+React.render(<App />, document.getElementById('root'));
+
 ```
 
